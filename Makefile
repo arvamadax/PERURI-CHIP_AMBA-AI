@@ -12,6 +12,7 @@ sim:
 	$(SIMRUN) TOP=tag_compare TESTMOD=test_tag_compare
 	for u in $(UNROLLS); do $(SIMRUN) TOP=ascon_perm TESTMOD=test_ascon_perm UNROLL=$$u || exit 1; done
 	for u in $(UNROLLS); do $(SIMRUN) TOP=tb_ctrl TESTMOD=test_ascon_ctrl UNROLL=$$u || exit 1; done
+	for u in $(UNROLLS); do $(SIMRUN) TOP=ascon_top TESTMOD=test_ascon_top UNROLL=$$u || exit 1; done
 
 cycles:
 	python sim/report_cycles.py
