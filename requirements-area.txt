@@ -1,0 +1,2 @@
+yowasp-yosys==0.60.0.0.post1055
+wasmtime==33.0.0

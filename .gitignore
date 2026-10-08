@@ -8,3 +8,4 @@ venv/
 .env
 *.key
 sim/out/
+quartus/build_u*/

@@ -1,0 +1,21 @@
+# Proyek Quartus Prime untuk ascon_top (DE10-Nano, Cyclone V 5CSEBA6U23I7).
+# BELUM DIJALANKAN: tidak ada hasil Quartus di repo ini sampai quartus/build.sh dieksekusi.
+# Pin: port bus (address, writedata, ...) dijadikan virtual pin supaya fitting mandiri tidak terbentur
+# jumlah pin I/O; di sistem HPS port ini terhubung ke Avalon bridge lewat Platform Designer.
+set_global_assignment -name FAMILY "Cyclone V"
+set_global_assignment -name DEVICE 5CSEBA6U23I7
+set_global_assignment -name TOP_LEVEL_ENTITY ascon_top
+set_global_assignment -name PROJECT_OUTPUT_DIRECTORY output_files
+set_global_assignment -name VERILOG_FILE ../rtl/ascon_round.v
+set_global_assignment -name VERILOG_FILE ../rtl/ascon_perm.v
+set_global_assignment -name VERILOG_FILE ../rtl/tag_compare.v
+set_global_assignment -name VERILOG_FILE ../rtl/ascon_ctrl.v
+set_global_assignment -name VERILOG_FILE ../rtl/ascon_csr_avalon.v
+set_global_assignment -name VERILOG_FILE ../rtl/ascon_top.v
+set_global_assignment -name SDC_FILE ascon_top.sdc
+# Ganti nilai UNROLL (1, 2, atau 4) untuk membandingkan area dan Fmax.
+set_parameter -name UNROLL 1
+set_global_assignment -name OPTIMIZATION_MODE "HIGH PERFORMANCE EFFORT"
+foreach p {rst address write writedata read readdata irq} {
+    set_instance_assignment -name VIRTUAL_PIN ON -to $p
+}

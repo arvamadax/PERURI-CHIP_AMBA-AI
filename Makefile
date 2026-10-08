@@ -1,4 +1,4 @@
-.PHONY: all model sim cycles clean
+.PHONY: all model sim cycles area clean
 UNROLLS = 1 2 4
 SIMRUN = $(MAKE) -C sim
 
@@ -13,6 +13,9 @@ sim:
 	for u in $(UNROLLS); do $(SIMRUN) TOP=ascon_perm TESTMOD=test_ascon_perm UNROLL=$$u || exit 1; done
 	for u in $(UNROLLS); do $(SIMRUN) TOP=tb_ctrl TESTMOD=test_ascon_ctrl UNROLL=$$u || exit 1; done
 	for u in $(UNROLLS); do $(SIMRUN) TOP=ascon_top TESTMOD=test_ascon_top UNROLL=$$u || exit 1; done
+
+area:
+	scripts/yosys_area.sh
 
 cycles:
 	python sim/report_cycles.py
